@@ -3,6 +3,27 @@ import bcrypt from "bcrypt";
 export async function insertUser({ username, password }) {
   const SQL = `INSERT INTO users(username,password) VALUES($1,$2) RETURNING *`;
   const hashedPassword = await bcrypt.hash(password, 10);
-  const { rows: users } = await db.query(SQL, [username, hashedPassword]);
-  return users[0];
+  const {
+    rows: [user],
+  } = await db.query(SQL, [username, hashedPassword]);
+  return user;
+}
+
+export async function getUserByUsername({ username, password }) {
+  const SQL = `SELECT * FROM users WHERE username = $1`;
+  const {
+    rows: [user],
+  } = await db.query(SQL, [username]);
+  if (!user) return null;
+  const verify = await bcrypt.compare(password, user.password);
+  if (!verify) return null;
+  return user;
+}
+
+export async function getUserById({ id }) {
+  const SQL = `SELECT * FROM users WHERE id = $1`;
+  const {
+    rows: [user],
+  } = await db.query(SQL, [id]);
+  return user;
 }

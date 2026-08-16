@@ -8,6 +8,8 @@ await seed();
 await db.end();
 console.log("🌱 Database seeded.");
 
+// Currently makes as many orders as there are users, assigning 1 to each. Each order will have 10 prods
+
 async function seed() {
   const userCount = 1;
 
