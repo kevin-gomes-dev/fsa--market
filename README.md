@@ -77,29 +77,29 @@ If a valid token is not provided, immediately send a 401 Unauthorized error.
 - `GET /products/:id` ✅
   - sends 404 if the product with that id does not exist
   - sends the specific product
-- 🔒 `GET /products/:id/orders` (DB ️✅)
+- 🔒 `GET /products/:id/orders` ✅
   - sends 404 if the product with that id does not exist (even if the user is logged in!)
   - sends an array of all orders made by the user that include this product
 
 `/orders` router
 
-- 🔒 `POST /orders` (DB ️✅)
+- 🔒 `POST /orders` ✅
   - sends 400 if request body does not include a `date`
   - creates a new order by the logged-in user and sends it with status 201
-- 🔒 `GET /orders` (DB ️✅)
+- 🔒 `GET /orders` ✅
   - sends array of all orders made by the logged-in user
-- 🔒 `GET /orders/:id` (DB ️✅)
+- 🔒 `GET /orders/:id` ✅
   - sends 404 if the order does not exist
   - sends 403 if the logged-in user is not the user who made the order
   - sends the order with the specified id
-- 🔒 `POST /orders/:id/products` (DB ️✅)
+- 🔒 `POST /orders/:id/products` ✅
   - sends 404 if the order does not exist
   - sends 403 if the logged-in user is not the user who made the order
   - sends 400 if the request body does not include a `productId` and a `quantity`
   - sends 400 if the `productId` references a product that does not exist
   - adds the specified quantity of the product to the order and sends the created
     `orders_products` record with status 201
-- 🔒 `GET /orders/:id/products` (DB ️✅)
+- 🔒 `GET /orders/:id/products` ✅
   - sends 404 if the order does not exist
   - sends 403 if the logged-in user is not the user who made the order
   - sends the array of products in the order

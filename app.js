@@ -3,6 +3,8 @@ import morgan from "morgan";
 import ordersRouter from "#api/ordersRouter";
 import productsRouter from "#api/productsRouter";
 import usersRouter from "#api/usersRouter";
+import getUserFromToken from "#middleware/getUserFromToken";
+import requireUser from "#middleware/requireUser";
 const app = express();
 export default app;
 
@@ -21,8 +23,10 @@ app.get("/", (req, res) =>
       `,
   ),
 );
+// Possibly attach user as req.user, if no or invalid form token, req.user = null else 401 err
+app.use(getUserFromToken);
 
-app.use("/orders", ordersRouter);
+app.use("/orders", requireUser, ordersRouter);
 app.use("/users", usersRouter);
 app.use("/products", productsRouter);
 

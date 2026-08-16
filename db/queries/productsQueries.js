@@ -22,7 +22,7 @@ export async function insertProduct({ title, description, price }) {
   return product;
 }
 
-export async function getUserOrdersWithProduct(userId, productId) {
+export async function getUserOrdersWithProduct({ userId, productId }) {
   // Order's user_id must = users.id
   const SQL = `SELECT orders.* FROM orders_products
     JOIN orders ON order_id = orders.id

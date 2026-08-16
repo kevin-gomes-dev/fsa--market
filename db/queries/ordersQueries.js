@@ -1,16 +1,16 @@
 import db from "#db/client";
 
-export async function getOrders(userId) {
+export async function getOrders({ userId }) {
   const SQL = `SELECT * FROM orders WHERE user_id = $1`;
   const { rows: orders } = await db.query(SQL, [userId]);
   return orders;
 }
 
-export async function getOrder(orderId) {
+export async function getOrder({ id }) {
   const SQL = `SELECT * FROM orders WHERE id = $1`;
   const {
     rows: [order],
-  } = await db.query(SQL, [orderId]);
+  } = await db.query(SQL, [id]);
   return order;
 }
 
@@ -31,11 +31,11 @@ export async function insertProductIntoOrder({ orderId, productId, quantity }) {
   return orderProduct;
 }
 
-export async function getProductsFromOrder(orderId) {
+export async function getProductsFromOrder({ id }) {
   const SQL = `SELECT products.* FROM orders_products
   JOIN orders ON order_id = orders.id
   JOIN products ON product_id = products.id
   WHERE orders.id = $1`;
-  const { rows: products } = await db.query(SQL, [orderId]);
+  const { rows: products } = await db.query(SQL, [id]);
   return products;
 }
