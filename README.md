@@ -63,18 +63,18 @@ If a valid token is not provided, immediately send a 401 Unauthorized error.
 
 `/users` router
 
-- `POST /users/register` (DB ️✅)
+- `POST /users/register` ✅
   - sends 400 if request body is missing username or password
   - creates a new user with the provided credentials and sends a token
   - the password should be hashed in the database
-- `POST /users/login` (DB ️✅)
+- `POST /users/login` ✅
   - sends 400 if request body is missing username or password
   - sends a token if the provided credentials are valid
 
 `/products` router
 
-- `GET /products` sends array of all products (DB ️✅)
-- `GET /products/:id` (DB ️✅)
+- `GET /products` sends array of all products ✅
+- `GET /products/:id` ✅
   - sends 404 if the product with that id does not exist
   - sends the specific product
 - 🔒 `GET /products/:id/orders` (DB ️✅)
